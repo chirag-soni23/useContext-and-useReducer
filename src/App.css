@@ -1,0 +1,15 @@
+
+input{
+    width: 60%;
+}
+.kg-row{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    margin: 10px ;
+    min-width: 80px;
+    
+}
+button{
+    width: 80px;
+}
