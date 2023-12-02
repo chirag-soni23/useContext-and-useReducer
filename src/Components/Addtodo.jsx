@@ -1,24 +1,56 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-function Addtodo({onNewitem}) {
-  const [todoName,setTodoname] = useState()
-  const [todoDuedate,setTodoDuedate] = useState()
+function Addtodo({ onNewitem }) {
+  const [todoName, setTodoname] = useState('');
+  const [todoDuedate, setTodoDuedate] = useState('');
+
+  const handleAddTodo = () => {
+    // Check if both fields are filled
+    if (todoName.trim() === '' || todoDuedate.trim() === '') {
+      alert('Please fill in all fields.');
+      return;
+    }
+
+    // Check if the date is valid
+    if (new Date(todoDuedate) < new Date()) {
+      alert('Please select a valid future date.');
+      return;
+    }
+
+    // Call the onNewitem function
+    onNewitem(todoName, todoDuedate);
+
+    // Clear the input fields
+    setTodoname('');
+    setTodoDuedate('');
+  };
 
   return (
     <div>
-          <div class="row kg-row">
-          <div class="col-4">
-            <input type="text" value={todoName} placeholder="Enter Todo here..." onChange={(e)=>setTodoname(e.target.value)} />
-          </div>
-          <div class="col-4">
-            <input type="date" value={todoDuedate} onChange={(e)=>setTodoDuedate(e.target.value)} />
-          </div>
-          <div class="col-2">
-            <button className="btn btn-success" onClick={()=>onNewitem(todoName,todoDuedate , setTodoDuedate(""),setTodoname("")) }>Add</button>
-          </div>
+      <div className="row kg-row">
+        <div className="col-4">
+          <input
+            type="text"
+            value={todoName}
+            placeholder="Enter Todo here..."
+            onChange={(e) => setTodoname(e.target.value)}
+          />
         </div>
+        <div className="col-4">
+          <input
+            type="date"
+            value={todoDuedate}
+            onChange={(e) => setTodoDuedate(e.target.value)}
+          />
+        </div>
+        <div className="col-2">
+          <button className="btn btn-success" onClick={handleAddTodo}>
+            Add
+          </button>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Addtodo
+export default Addtodo;
