@@ -22,12 +22,17 @@ function App() {
     // },
   ];
   // Add todo
-  const [todoItems,setTodoitems] = useState(initialtodoItems)
+  const [todoItems,setTodoitems] = useState([])
   const handleNewitem = (itemName,itemDuedate)=>{
    // console.log(itemName + " Date " +  itemDuedate);
-    const newtodoItems =[...todoItems,  {name:itemName,
-    dueDate:itemDuedate}]
-    setTodoitems(newtodoItems)
+   
+    // setTodoitems(newtodoItems)
+    setTodoitems((currVal)=>{
+      const newtodoItems =[...currVal,  {name:itemName,
+        dueDate:itemDuedate}]
+        return newtodoItems;
+
+    })
     // Delete todo
 
   }
@@ -36,7 +41,6 @@ function App() {
     const newItem =  todoItems.filter(item =>item.name != todoItemname)
     setTodoitems(newItem)
   }
-
   return (
     <center className="todo-container">
       <AppName />

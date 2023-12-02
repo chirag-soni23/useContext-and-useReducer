@@ -1,42 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { IoIosAddCircle } from "react-icons/io";
 
 function Addtodo({ onNewitem }) {
-  const [todoName, setTodoname] = useState("");
-  const [todoDuedate, setTodoDuedate] = useState("");
+  const todoNameelement = useRef();
+  const todoDuedateelement = useRef();
 
   const handleAddTodo = (e) => {
     e.preventDefault();
-    if (todoName.trim() === "" || todoDuedate.trim() === "") {
+
+    const todoname = todoNameelement.current.value;
+    const duedate = todoDuedateelement.current.value;
+
+    if (todoname.trim() === "" || duedate.trim() === "") {
       alert("Please fill in all fields.");
       return;
     }
-    if (new Date(todoDuedate) < new Date()) {
+    
+    if (new Date(duedate) < new Date()) {
       alert("Please select a valid future date.");
       return;
     }
-    onNewitem(todoName, todoDuedate);
-    setTodoname("");
-    setTodoDuedate("");
+    todoNameelement.current.value = "";
+    todoDuedateelement.current.value = "";
+
+    onNewitem(todoname, duedate);
   };
 
   return (
     <div>
       <div className="todo">
-        <form action="" onSubmit={handleAddTodo} className="row kg-row">
+        <form onSubmit={handleAddTodo} className="row kg-row">
           <div className="col-4">
             <input
               type="text"
-              value={todoName}
+              ref={todoNameelement}
               placeholder="Enter Todo here..."
-              onChange={(e) => setTodoname(e.target.value)}
             />
           </div>
           <div className="col-4">
             <input
               type="date"
-              value={todoDuedate}
-              onChange={(e) => setTodoDuedate(e.target.value)}
+              ref={todoDuedateelement}
             />
           </div>
           <div className="col-2">
@@ -51,3 +55,4 @@ function Addtodo({ onNewitem }) {
 }
 
 export default Addtodo;
+
