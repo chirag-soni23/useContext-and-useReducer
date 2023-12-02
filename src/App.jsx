@@ -8,18 +8,18 @@ function App() {
   let time = new Date();
   let tododate = time.toLocaleDateString();
   const initialtodoItems = [
-    {
-      name: "Buy Milk",
-      dueDate: "12/12/2023",
-    },
-    {
-      name: "Go To College",
-      dueDate: '14/12/2023',
-    },
-    {
-      name: "Like this Video",
-      dueDate:'Right Now',
-    },
+    // {
+    //   name: "Buy Milk",
+    //   dueDate: "12/12/2023",
+    // },
+    // {
+    //   name: "Go To College",
+    //   dueDate: '14/12/2023',
+    // },
+    // {
+    //   name: "Like this Video",
+    //   dueDate:'Right Now',
+    // },
   ];
   // Add todo
   const [todoItems,setTodoitems] = useState(initialtodoItems)
