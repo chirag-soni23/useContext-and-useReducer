@@ -4,51 +4,40 @@ import Addtodo from "./Components/Addtodo";
 import "./App.css";
 import Todoitems from "./Components/Todoitems";
 import Welcomemsg from "./Components/Welcomemsg";
+import { Store } from "./Store/Store";
 function App() {
   let time = new Date();
   let tododate = time.toLocaleDateString();
-  const initialtodoItems = [
-    // {
-    //   name: "Buy Milk",
-    //   dueDate: "12/12/2023",
-    // },
-    // {
-    //   name: "Go To College",
-    //   dueDate: '14/12/2023',
-    // },
-    // {
-    //   name: "Like this Video",
-    //   dueDate:'Right Now',
-    // },
-  ];
   // Add todo
-  const [todoItems,setTodoitems] = useState([])
-  const handleNewitem = (itemName,itemDuedate)=>{
-   // console.log(itemName + " Date " +  itemDuedate);
-   
+  const [todoItems, setTodoitems] = useState([]);
+  const handleNewitem = (itemName, itemDuedate) => {
+    // console.log(itemName + " Date " +  itemDuedate);
     // setTodoitems(newtodoItems)
-    setTodoitems((currVal)=>{
-      const newtodoItems =[...currVal,  {name:itemName,
-        dueDate:itemDuedate}]
-        return newtodoItems;
-
-    })
+    setTodoitems((currVal) => {
+      const newtodoItems = [
+        ...currVal,
+        { name: itemName, dueDate: itemDuedate },
+      ];
+      return newtodoItems;
+    });
     // Delete todo
-
-  }
-  const handleDeleteItem = (todoItemname)=>{
-   // console.log("Item Delete :- " + todoItemname)
-    const newItem =  todoItems.filter(item =>item.name != todoItemname)
-    setTodoitems(newItem)
-  }
+  };
+  const handleDeleteItem = (todoItemname) => {
+    // console.log("Item Delete :- " + todoItemname)
+    const newItem = todoItems.filter((item) => item.name != todoItemname);
+    setTodoitems(newItem);
+  };
+  const defaultTodoitems = [{ name: "buy ghee", dueDate: "1233" }];
+  //console.log(defaultTodoitems);
   return (
-    <center className="todo-container">
-      <AppName />
-      <Addtodo onNewitem={handleNewitem}  />
-      {todoItems.length== 0 && <Welcomemsg/>}
-      <Todoitems todoItems={todoItems} onDeleteclick = {handleDeleteItem}/>
-   
-    </center>
+    <Store.Provider value={{todoItems:todoItems,addnewItem:handleNewitem,deleteitem:handleDeleteItem}}>
+      <center className="todo-container">
+        <AppName />
+        <Addtodo onNewitem={handleNewitem} />
+        <Welcomemsg todoItems={todoItems} />
+        <Todoitems todoItems={todoItems} onDeleteclick={handleDeleteItem} />
+      </center>
+    </Store.Provider>
   );
 }
 

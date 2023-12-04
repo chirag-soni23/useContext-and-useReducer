@@ -15,7 +15,7 @@ function Addtodo({ onNewitem }) {
       alert("Please fill in all fields.");
       return;
     }
-    
+
     if (new Date(duedate) < new Date()) {
       alert("Please select a valid future date.");
       return;
@@ -38,10 +38,7 @@ function Addtodo({ onNewitem }) {
             />
           </div>
           <div className="col-4">
-            <input
-              type="date"
-              ref={todoDuedateelement}
-            />
+            <input type="date" ref={todoDuedateelement} />
           </div>
           <div className="col-2">
             <button type="submit" className="btn btn-success">
@@ -55,4 +52,3 @@ function Addtodo({ onNewitem }) {
 }
 
 export default Addtodo;
-

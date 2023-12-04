@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { MdDeleteForever } from "react-icons/md";
-function Todoitems({todoItems, onDeleteclick }) {
+import { Store } from "../Store/Store";
+function Todoitems({ onDeleteclick }) {
+  const contextObj = useContext(Store)
+  const todoItems = contextObj.todoItems
+  console.log(todoItems);
   return (
     <div>
       <div className="items-container">
@@ -17,7 +21,6 @@ function Todoitems({todoItems, onDeleteclick }) {
         })}
       </div>
     </div>
-  );
-}
+  );}
 
 export default Todoitems;
